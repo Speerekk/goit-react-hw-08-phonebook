@@ -14,9 +14,35 @@ const RegisterForm = () => {
     }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    // Отправка данных на сервер для регистрации
+
+    try {
+      const response = await fetch(
+        'https://connections-api.herokuapp.com/users/signup',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        // Сохраните токен JWT в localStorage
+        localStorage.setItem('token', data.token);
+
+        // Перенаправьте пользователя на другую страницу
+        window.location.href = '/contacts';
+      } else {
+        // Обработка ошибки регистрации
+        // Выведите сообщение об ошибке или выполните другие действия
+      }
+    } catch (error) {
+      // Обработка ошибок сети или других ошибок
+    }
   };
 
   return (

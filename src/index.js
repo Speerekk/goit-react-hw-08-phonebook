@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './components/ContactForm/Store.jsx';
 import App from './App';
@@ -15,12 +15,12 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Navigation />
-      <Switch>
-        <Route path="/register" component={RegisterForm} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/contacts" component={ContactPage} />
-        <Route path="/" component={App} />
-      </Switch>
+      <Routes>
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/contacts" element={<ContactPage />} />
+        <Route path="/" element={<App />} />
+      </Routes>
     </Router>
   </Provider>,
   document.getElementById('root')
